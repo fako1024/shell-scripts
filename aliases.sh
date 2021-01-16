@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Check for dependencies
+if [ -z "$SHELL_SCRIPTS_BASE_EXPORTED" ]; then
+  echo "WARNING: Shell Script base not loaded, some commands will not be available"
+fi
+if [ -z "$SHELL_SCRIPTS_FUNCTIONS_EXPORTED" ]; then
+  echo "WARNING: Shell Script functions are not loaded, some commands will not be available"
+fi
+
 # Generic command aliases
 alias grep="grep -a --color=auto --exclude-dir=.git"
 alias g="grep --color=auto"
@@ -35,3 +43,6 @@ if cmd_exists git; then
   alias gs='git status'
   alias gti="git"
 fi
+
+# Set marker denoting successful inclusion of this script
+SHELL_SCRIPTS_ALIASES_EXPORTED=1
