@@ -44,7 +44,7 @@ function install_shell_scripts {
   dl $SHELL_SCRIPTS_DL_URL - | tar xzf - -C $TMPDIR || return 1
 
   # Put in current location
-  cp /tmp/.shell_scripts/shell-scripts-main/*.sh $THISDIR/ || return 1
+  cp /tmp/.shell_scripts/shell-scripts-main/.*.sh $THISDIR/ || return 1
 
   # Clean up
   rm -rf $TMPDIR
