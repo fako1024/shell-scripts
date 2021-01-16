@@ -1,0 +1,10 @@
+# .bashrc
+
+# Source included files
+THISDIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$THISDIR" ]]; then
+  DIR="$PWD"
+fi
+. "$THISDIR/base.sh"
+. "$THISDIR/functions.sh"
+. "$THISDIR/aliases.sh"
