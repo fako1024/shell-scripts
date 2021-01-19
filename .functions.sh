@@ -53,7 +53,7 @@ function pknock {
   # Check if nmap-ncat is available, otherwise fall back to nc
   # The latter is slower since sub-second timeouts are not supported
   NCAT="ncat -w 50ms"
-  if ! command_exists "ncat"; then
+  if ! cmd_exists "ncat"; then
     echo "Missing ncat command, falling back to nc"
     NCAT="nc -w 1"
   fi
