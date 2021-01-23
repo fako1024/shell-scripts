@@ -4,15 +4,6 @@ if [ -z "$SHELL_SCRIPTS_BASE_EXPORTED" ]; then
   echo "WARNING: Shell Script base not loaded, some commands will not be available"
 fi
 
-# cmd_exists is a shorthand for 'command', returning if a command exists
-function cmd_exists {
-  if ! command -v $1 &> /dev/null; then
-    return 1
-  fi
-
-  return 0
-}
-
 # dl provides a generic command line downloader based on available
 # tools (wget / curl)
 function dl {
