@@ -152,5 +152,31 @@ function install_go {
   return 0
 }
 
+function gen_random_string {
+
+  # Set entropy pool and define defaults
+  ENTROPY=/dev/urandom
+  POOL='A-Za-z0-9'
+  LENGTH=20
+
+  # Perform sanity checks
+  if [ "$1" != "" ]; then
+    LENGTH=$1
+  fi
+
+  echo $(< $ENTROPY tr -dc $POOL | head -c${1:-${LENGTH}}; echo;)
+
+  return 0
+}
+
+function runGoFunc {
+  TMPFILE="/tmp/$(gen_random_string 20).go"
+
+  cat "$@" > $TMPFILE
+  go run $TMPFILE
+
+  rm $TMPFILE
+}
+
 # Set marker denoting successful inclusion of this script
 SHELL_SCRIPTS_FUNCTIONS_EXPORTED=1
