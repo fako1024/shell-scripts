@@ -173,9 +173,24 @@ function runGoFunc {
   TMPFILE="/tmp/$(gen_random_string 20).go"
 
   cat "$@" > $TMPFILE
-  go run $TMPFILE
+  GO111MODULE=off go run $TMPFILE
 
   rm $TMPFILE
+}
+
+function today {
+  CURCTX=$(task _get rc.context)
+  if [[ "$CURCTX" == "" ]]; then
+    echo "Cannot determine current context"
+    return 1
+  fi
+
+  task context none > /dev/null
+  task due:today
+
+  task context $CURCTX > /dev/null
+
+  return 0
 }
 
 # Set marker denoting successful inclusion of this script
