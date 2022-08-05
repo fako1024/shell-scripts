@@ -178,20 +178,22 @@ function runGoFunc {
   rm $TMPFILE
 }
 
-function today {
-  CURCTX=$(task _get rc.context)
-  if [[ "$CURCTX" == "" ]]; then
-    echo "Cannot determine current context"
-    return 1
-  fi
+if command -v task 2>&1 > /dev/null; then
+  function today {
+    CURCTX=$(task _get rc.context)
+    if [[ "$CURCTX" == "" ]]; then
+      echo "Cannot determine current context"
+      return 1
+    fi
 
-  task context none > /dev/null
-  task due:today
+    task context none > /dev/null
+    task due:today
 
-  task context $CURCTX > /dev/null
+    task context $CURCTX > /dev/null
 
-  return 0
-}
+    return 0
+  }
+fi
 
 # Set marker denoting successful inclusion of this script
 SHELL_SCRIPTS_FUNCTIONS_EXPORTED=1
