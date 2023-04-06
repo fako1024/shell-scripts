@@ -178,6 +178,26 @@ function runGoFunc {
   rm $TMPFILE
 }
 
+# Private toggles if the current shell is private (i.e. history is turned off)
+# Should have the following two environment variables to visualize status:
+# $PS1_DEFAULT -> PS1 prompt for normal mode
+# $PS1_PRIVATE -> PS1 prompt for private mode
+function private {
+  if [[ -z "$SHELL_IS_PRIVATE" ]]; then
+    export SHELL_IS_PRIVATE="TRUE"
+    if [[ ! -z "$PS1_PRIVATE" ]]; then
+      export PS1=$PS1_PRIVATE
+    fi
+    set +o history
+  else
+    unset SHELL_IS_PRIVATE
+    if [[ ! -z "$PS1_DEFAULT" ]]; then
+      export PS1=$PS1_DEFAULT
+    fi
+    set -o history
+  fi
+}
+
 if command -v task 2>&1 > /dev/null; then
   function today {
     CURCTX=$(task _get rc.context)
