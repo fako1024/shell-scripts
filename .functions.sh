@@ -207,7 +207,7 @@ if command -v task 2>&1 > /dev/null; then
     fi
 
     task context none > /dev/null
-    task due:today
+    task due.before:tomorrow
 
     task context $CURCTX > /dev/null
 
