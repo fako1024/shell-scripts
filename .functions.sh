@@ -207,6 +207,7 @@ if command -v task 2>&1 > /dev/null; then
     fi
 
     task context none > /dev/null
+
     task due.before:tomorrow
     task due.after:tomorrow due.before:+7d
 
